@@ -25,10 +25,7 @@
 (println "Wieviel wurde ausgeliefert?")
 (def anzahl-artikel (read))
 (println "Neuer Lagerbestand")
-(def anzahl-alt lager "PS5")
-(def lager (dissoc lager artikel))
-(def anzahl-neu (- anzahl-alt anzahl-artikel))
-(def lager (assoc lager artikel anzahl-neu))
-(println lager)
+(def new-lager (update lager artikel #(- % anzahl-artikel)))
+(println new-lager)
 
 

@@ -18,19 +18,14 @@
 
 (println "---------- Zufallsgenerator der Gruppe 05 ----------")
 
-(use 'clojure.pprint 'clojure.reflect)
-
-(def rw 4)
-(def az 12)
-
 ; definiere Reichweite der gezogenen Zahlen von 0 bis n
-(def reichweite rw)
+(def reichweite 4)
 
 ; definiere Anzahl der Ziehungen
-(def anzahl-ziehungen az)
+(def anzahl-ziehungen 12)
 
 ; generiere Liste mit bestimmten Anzahl der Zufallszahlen
-(def liste (repeatedly anzahl-ziehungen #(rand-int 4)))
+(def liste (repeatedly anzahl-ziehungen #(rand-int reichweite)))
 (println "Liste: " liste)
 
 ; speichere Häufigkeiten in einen Vektor
@@ -49,11 +44,12 @@
 ; berechne erwartete Häufigkeit
 (def erwartet (int (* wahrscheinlichkeit summe-haeufigkeit)))
 
+
 ; gebe Tabelle aus
 (println "Zahl" "Haeufigkeit" "erwartet" "abs Abw." "rel Abw." "  ^2")
 (dotimes [n reichweite]
   (def haeufigkeit (count (filter #(= % n) liste)))
-  (def abs-abweichung (- (count (filter #(= % n) liste)) erwartet))
+  (def abs-abweichung (- haeufigkeit erwartet))
   (def rel-abweichung (float (/ abs-abweichung erwartet)))
   (def hoch-zwei (Math/pow rel-abweichung 2))
   (println n "  " haeufigkeit "         " erwartet "      " abs-abweichung "      " (format "%.3f" rel-abweichung) "    " (format "%.3f" hoch-zwei)))
@@ -62,7 +58,7 @@
 (defn hoch-zwei-vektor []
   (loop [j 0 vektor2 []]
     (def haeufigkeit2 (count (filter #(= % j) liste)))
-    (def abs-abweichung2 (- (count (filter #(= % j) liste)) erwartet))
+    (def abs-abweichung2 (- haeufigkeit erwartet))
     (def rel-abweichung2 (float (/ abs-abweichung2 erwartet)))
     (def hoch-zwei2 (Math/pow rel-abweichung2 2))
     (if (< j reichweite)
@@ -78,14 +74,11 @@
 ;----------------------------------------------------------------------------------------------------------------------------------------------------------
 (println "------- Zufallsgenerator aus der Straßenbahn -------")
 
-(def rw 4)
-(def az 12)
-
 ; definiere Reichweite der gezogenen Zahlen von 0 bis n
-(def reichweite rw)
+(def reichweite 4)
 
 ; definiere Anzahl der Ziehungen
-(def anzahl-ziehungen az)
+(def anzahl-ziehungen 12)
 
 (defn srand-int [max]
   "Generate a new random number between 0 and `max` (exklusive)"
@@ -117,7 +110,7 @@
 (println "Zahl" "Haeufigkeit" "erwartet" "abs Abw." "rel Abw." "  ^2")
 (dotimes [n reichweite]
   (def haeufigkeit (count (filter #(= % n) liste)))
-  (def abs-abweichung (- (count (filter #(= % n) liste)) erwartet))
+  (def abs-abweichung (- haeufigkeit erwartet))
   (def rel-abweichung (float (/ abs-abweichung erwartet)))
   (def hoch-zwei (Math/pow rel-abweichung 2))
   (println n "  " haeufigkeit "         " erwartet "      " abs-abweichung "      " (format "%.3f" rel-abweichung) "    " (format "%.3f" hoch-zwei)))
@@ -126,7 +119,7 @@
 (defn hoch-zwei-vektor []
   (loop [j 0 vektor2 []]
     (def haeufigkeit2 (count (filter #(= % j) liste)))
-    (def abs-abweichung2 (- (count (filter #(= % j) liste)) erwartet))
+    (def abs-abweichung2 (- haeufigkeit erwartet))
     (def rel-abweichung2 (float (/ abs-abweichung2 erwartet)))
     (def hoch-zwei2 (Math/pow rel-abweichung2 2))
     (if (< j reichweite)
@@ -139,5 +132,6 @@
 (println "Fehler =" (format "%.4f" fehler))
 
 (comment "
-  Fazit: Der Zufallsgenerator aus der Straßenbahn hat eine höhere Fehlerquote!
+  Fazit: Der Zufallsgenerator aus der Straßenbahn hat eine höhere Fehlerquote! Jedoch kommt es bei einer vorgegebenen
+  Zahl von 100000000 zu einer Exception (java.lang.OutOfMemoryError).
 ")
