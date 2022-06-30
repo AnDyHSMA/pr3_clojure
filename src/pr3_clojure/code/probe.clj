@@ -1,6 +1,6 @@
-(defn fact [n]
-  (cond
-    (= n 0) 1
-    (> n 0) (* n (fact (- n 1)))))
+(defn my-average [& rest]
+   (/ (reduce + rest) (count rest)))
 
-(print (fact 5))
+(println (my-average 6 4))
+(println (my-average 6 4 6 4))
+(println (my-average 6 4 6 4 6 4))
