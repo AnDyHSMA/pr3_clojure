@@ -1,6 +1,8 @@
-(defn my-average [& rest]
-   (/ (reduce + rest) (count rest)))
+(defn summe-berechnen [liste]
+   (loop [ergebnis 0 rest-liste liste]
+   (if (> (count rest-liste) 0)
+      (recur (+ ergebnis (first rest-liste)) (rest liste))
+      ergebnis)))
 
-(println (my-average 6 4))
-(println (my-average 6 4 6 4))
-(println (my-average 6 4 6 4 6 4))
+(println (summe-berechnen '(1 2 3 4 5)))
+

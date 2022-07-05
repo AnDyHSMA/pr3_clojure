@@ -8,7 +8,7 @@
     (= n 1) 1
     :else (+ (fib (- n 1)) (fib (- n 2)))))
 
-(print (fib 9))
+(println (fib 12))
 ; Testfälle
 (assert (= [0 1 1 2 3 5 8 13 21 34]
            [(fib 0) (fib 1) (fib 2) (fib 3) (fib 4)

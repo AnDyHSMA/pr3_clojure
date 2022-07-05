@@ -3,6 +3,6 @@
 (println "Produktname eingeben: ")
 (def produkt (read-line))
 (println "Einkaufspreis eingeben: ")
-(def p_E (read))
+(def p_E (Integer/parseInt (read-line)))
 (def p_V (max(* 2.5 p_E), 995))
-(println "Sonderangebot: " p_V)
+(println "Sonderangebot für" produkt ":" p_V)
