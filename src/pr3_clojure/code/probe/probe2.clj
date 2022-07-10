@@ -1,2 +1,1 @@
-(ns code.probe2)
-(def a 42)
+(print (count '(1 2 3 4 5)))
