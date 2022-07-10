@@ -4,4 +4,4 @@
   {:pre [(>= n 0)] :post [(> % 0)]}
   (Math/sqrt n))
 
-(println (sqrt 0))
+(println (sqrt 4))

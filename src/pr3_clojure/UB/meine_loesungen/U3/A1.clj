@@ -5,7 +5,7 @@
   Verwendung von loop und recur."
   [zahlen]
   (loop [produkt 1 rest-liste zahlen]
-    (if (seq rest-liste)
+    (if (not= rest-liste '())
       (recur (* produkt (first rest-liste)) (rest rest-liste))
       produkt)))
 

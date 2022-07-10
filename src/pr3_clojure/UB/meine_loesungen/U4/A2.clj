@@ -6,7 +6,7 @@
   gegeben."
   [string]
   (try
-    (+ 2 string)
+    (Integer/parseInt string)
     (catch Exception e -1)))
 
-(println (number-formatter "a"))
+(println (number-formatter "4"))

@@ -3,21 +3,32 @@
 (def generationen 14)
 
 (defn fib [n]
-  {:pre [(>= n 0)] :post [(>= % 0)]}
-     (loop [zahl1 0 zahl2 1 step n]
-       (cond
-         (= step 0) zahl1
-         :else (recur zahl2 (+ zahl1 zahl2) (dec step)))))
+  (cond
+    (= n 0) 0
+    (= n 1) 1
+    :else
+    (loop [zahl1 0 zahl2 1 step n]
+      (if (= step 0)
+        (print zahl1)
+        (recur zahl2 (+ zahl1 zahl2) (dec step))))))
 
 (defn fibs [n]
-  {:pre [(>= n 0)]}
-  (let [vektor (range (inc n))]
-    (map #(fib %) vektor)))
-
-(println (fibs 5))
+  (cond
+    (= n 0) 0
+    (= n 1) 1
+    :else
+    (loop [zahl1 0 zahl2 1 schritte n]
+      (if (> schritte 0)
+        (do
+          (print zahl1 " ")
+          (recur zahl2 (+ zahl1 zahl2) (dec schritte)))
+        (println zahl1)))))
 
 (defn kaninchen []
-  (println "Nach" generationen "Generationen haben wir" (fib generationen) "Kaninchen")
-  (println "Die Population entwickelt sich so:" (fibs generationen)))
+  (print "Nach" generationen "Generationen haben wir ")
+  (fib generationen)
+  (println " Kaninchen")
+  (print "Die Population entwickelt sich so: ")
+  (fibs generationen))
 
 (kaninchen)
